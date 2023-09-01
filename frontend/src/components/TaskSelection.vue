@@ -46,10 +46,10 @@ onBeforeMount(() =>
 	.task-container
 	{
 		display: flex;
-    	align-items: center;
+		align-items: center;
 		justify-content: space-around;
-    	background-color: white;
-    	height: 7rem;
+		background-color: white;
+		height: 7rem;
 		border-radius: 0.8rem;
 		margin: 1rem 0;
 	}
@@ -61,8 +61,8 @@ onBeforeMount(() =>
 	.task-info
 	{
 		width: 60%;
-    	height: 70%;
-    	overflow-y: scroll;
+		height: 70%;
+		overflow-y: scroll;
 		overscroll-behavior: none;
 	}
 
@@ -79,24 +79,24 @@ onBeforeMount(() =>
 
 	.scrollbar::-webkit-scrollbar 
 	{
-	    width: 6px;
+		width: 6px;
 	}
 
 	.scrollbar::-webkit-scrollbar-track 
 	{
-	    background-color: transparent; 
+		background-color: transparent; 
 	}
 
 	.scrollbar::-webkit-scrollbar-thumb 
 	{
-	    background-color: rgba(186, 186, 192, 0.5); 
-	    border-radius: 16px;
-	    border: 5px solid transparent; 
+		background-color: rgba(186, 186, 192, 0.5); 
+		border-radius: 16px;
+		border: 5px solid transparent; 
 	}
 
 	.scrollbar::-webkit-scrollbar-button 
 	{
-	    display: none;
+		display: none;
 	}
 
 </style>

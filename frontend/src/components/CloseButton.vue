@@ -3,10 +3,10 @@ const props = defineProps({
 path: {
         type: String,
     },
-     fill: {
+fill: {
       type: String,
       default: "white"
-     }
+    }
 })
 </script>
 
