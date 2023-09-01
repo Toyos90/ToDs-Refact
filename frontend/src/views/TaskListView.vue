@@ -5,6 +5,7 @@ import TaskSelection from '../components/TaskSelection.vue'
 import AddButton from '../components/AddButton.vue'
 import CloseButton from '../components/CloseButton.vue'
 import Modal from '../components/Modal.vue';
+import ApiConnection from '../services/ApiConnection';
 
 const route = useRoute();
 const priority = route.params.priority;
