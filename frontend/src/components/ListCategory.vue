@@ -51,17 +51,17 @@ const props = defineProps({
 
 .urgent{
   border:rgba(58, 47, 132, 1) solid 0.0625rem;
-  background-color:rgba(58, 47, 132, 1);
+  background-color:#4F766F;
 }
 
 .high{
   border:rgba(255, 158, 19, 1) solid 0.0625rem;
-  background-color:rgba(255, 158, 19, 1);
+  background-color:#E6C570;
 }
 
 .normal{
   border:rgba(50, 201, 83, 1) solid 0.0625rem;
-  background-color:rgba(50, 201, 83, 1);
+  background-color:#FACAAB;
 }
 
 .rectangle-category{
