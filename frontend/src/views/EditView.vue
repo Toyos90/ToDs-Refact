@@ -249,7 +249,7 @@ button {
         width: 12.8125rem;
         height: 3.75rem;
         border-radius: 0.625rem;
-        background: #DC2626;
+        background: blue;
         flex-shrink: 0;
         border: none;
         color: #fff;

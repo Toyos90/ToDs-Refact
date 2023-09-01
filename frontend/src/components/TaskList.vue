@@ -1,15 +1,11 @@
 <script setup> //This component is to be used when dealing with categories
 import { onBeforeMount, ref } from 'vue';
-<<<<<<< HEAD
-
-import GetTasks from '../services/ApiConnection'
-=======
-import { RouterLink, RouterView } from 'vue-router'
-import ApiConnection from '../services/ApiConnection'
->>>>>>> 1f51f90e20617145b8751459f7b39744afb05c88
 import TaskSelection from './TaskSelection.vue'
 import AddButton from './AddButton.vue'
 import CloseButton from './CloseButton.vue';
+import GetTasks from '../services/ApiConnection';
+import { RouterLink, RouterView } from 'vue-router'
+import ApiConnection from '../services/ApiConnection'
 
 defineProps
 (

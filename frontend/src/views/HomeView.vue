@@ -71,7 +71,7 @@ header{
   justify-content: center;
   align-items: center;
   height: 6.25rem;
-  background: rgba(221, 75, 57, 1);
+  background: peachpuff;
 }
 
 h1{
@@ -93,7 +93,6 @@ h1{
 
 .categories-title{
   font: normal 700 1.875rem "Inter";
-  color: rgba(0, 0, 0, 1);
   margin-bottom: 1.985rem;
 }
 
