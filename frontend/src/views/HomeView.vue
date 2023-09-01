@@ -33,11 +33,10 @@ onBeforeMount(() => {
   <main class="main-container">
   
     <header>
-      <h1>To do List</h1>
+      <h1 class="categories-title">My To Do´s List</h1>
     </header>
   
     <div class="categories">  
-      <p class="categories-title">My To do´s</p>
       <div class="ico-addTask">
         <AddButton></AddButton>
       </div>

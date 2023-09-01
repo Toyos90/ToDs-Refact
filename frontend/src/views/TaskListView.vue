@@ -1,24 +1,24 @@
 <script setup>
+import { useRoute } from 'vue-router';
 import { onBeforeMount, ref } from 'vue';
-import { useRoute } from 'vue-router'
-import TaskSelection from '../components/TaskSelection.vue'
-import AddButton from '../components/AddButton.vue'
-import CloseButton from '../components/CloseButton.vue'
-import Modal from '../components/Modal.vue';
 import ApiConnection from '../services/ApiConnection';
+import TaskSelection from '../components/TaskSelection.vue';
+import AddButton from '../components/AddButton.vue';
+import CloseButton from '../components/CloseButton.vue';
+import Modal from '../components/Modal.vue';
 
 const route = useRoute();
 const priority = route.params.priority;
-const modal = (route.params.modal === "true") || false;
-const action = route.params.action || "";
+const modal = (route.params.modal === 'true') || false;
+const action = route.params.action || '';
 
 const tasks = ref([]);
 const showModal = ref(false);
 
 onBeforeMount(async () => {
-  showModal.value = props.modal;
+  showModal.value = modal;
   const taskData = await ApiConnection.getAllTasks();
-  tasks.value = taskData.data.filter((task) => task.priority === props.priority);
+  tasks.value = taskData.data.filter((task) => task.priority === priority);
 });
 </script>
 
