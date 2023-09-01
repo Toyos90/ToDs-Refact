@@ -7,13 +7,6 @@ import CloseButton from '../components/CloseButton.vue'
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 
-const props = defineProps({
-  title: {
-    type: String,
-  }
-});
-
-const id = ref()
 const router = useRouter();
 
 const newTask = ref({
@@ -53,7 +46,7 @@ const submit = async () => {
       <h2 class="add-task-title">Add Task</h2>
 
       <h4>Task</h4>
-      <input v-model="newTask.title" id="task-text" type="text" placeholder="Enter Task" required="true"/>
+      <input v-model="newTask.title" id="task-text" type="text" placeholder="Enter Task" required/>
 
       <h4>Description (Optional)</h4>
       <input v-model="newTask.description" id="description-text" type="text" placeholder="Enter Description" />

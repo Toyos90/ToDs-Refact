@@ -15,9 +15,8 @@ const props = defineProps({
     type:String,
   }
 })
-
-
 </script>
+
 <template>
   <main>
     <div class="rectangle-color" :class=priority>

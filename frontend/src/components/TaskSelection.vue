@@ -77,19 +77,16 @@ onBeforeMount(() =>
 		text-decoration: line-through;
 	}
 
-		/* total width */
 	.scrollbar::-webkit-scrollbar 
 	{
 	    width: 6px;
 	}
 
-	/* background of the scrollbar except button or resizer */
 	.scrollbar::-webkit-scrollbar-track 
 	{
 	    background-color: transparent; 
 	}
 
-	/* scrollbar itself */
 	.scrollbar::-webkit-scrollbar-thumb 
 	{
 	    background-color: rgba(186, 186, 192, 0.5); 
@@ -97,7 +94,6 @@ onBeforeMount(() =>
 	    border: 5px solid transparent; 
 	}
 
-	/* Set button (top and bottom of the scrollbar) */
 	.scrollbar::-webkit-scrollbar-button 
 	{
 	    display: none;
