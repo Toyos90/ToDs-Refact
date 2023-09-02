@@ -111,7 +111,7 @@ const submit = async () => {
 }
 
 #top {
-  background: #dd4b39;
+  background: mediumaquamarine;
   padding: 0.4rem 2rem;
   border-radius: 0.6rem;
 }
@@ -129,13 +129,12 @@ h3 {
 }
 
 h4 {
-  color: #FF9E13;
   margin: 1rem 0;
   font-size:1.2rem;
 }
 
 input {
-  background-color: #dd4b39;
+  background-color: mediumturquoise;
   border: none;
   border-bottom: 0.1rem solid #FF9E13;
   padding: 0.5rem;
