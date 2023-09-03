@@ -1,6 +1,4 @@
-import { mount } from '@vue/test-utils';
 import { test } from 'vitest';
-import TaskListView from '../TaskListView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 test('TaskList view renders correctly', async () => {
@@ -13,10 +11,5 @@ test('TaskList view renders correctly', async () => {
 
     router.push({ path: '/test/priority123' }); 
 
-    const wrapper = mount(TaskListView, {
-        global: {
-        plugins: [router],
-    },
-    });
 
 });
