@@ -93,8 +93,7 @@ h1{
 
 .categories-title{
   font: normal 700 1.875rem "Inter";
-  margin-bottom: 1.985rem;
-}
+  }
 
 .ico-addTask{
   width: 1.8125rem;
@@ -110,6 +109,14 @@ h1{
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .rectangles-categories {
+    display: flex;
+    flex-direction: row;
+    }
+  
 }
 
 </style>

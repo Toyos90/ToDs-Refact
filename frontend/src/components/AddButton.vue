@@ -20,7 +20,7 @@
 		width: 4rem;
 		height: 4rem;
 		border-radius: 5px;
-		background-color: #DF373B;
+		background-color: rgb(50, 90, 198);
 	}
 
 </style>

@@ -44,7 +44,7 @@ const props = defineProps({
   url(../src/assets/fonts/Inter/Inter-Regular.ttf) format("truetype");
 }
 .rectangle-color{
-  margin-top:3.5rem;
+  margin:3.5rem 20px;
   width: 20rem;
   border-radius:0.7rem;
 }
