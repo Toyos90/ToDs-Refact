@@ -1,15 +1,22 @@
-import { mount } from '@vue/test-utils';
-import { expect, test } from 'vitest';
+
 import HomeView from '../HomeView.vue';
+import { test, it } from 'vitest';
 
+test('HomeView.vue', () => {
+  it('renderiza correctamente', async () => {
+    const { getByText, getByTestId } = render(HomeView);
 
-test('TaskListView makes API call', async () => {
-  // Monta el componente TaskListView
-  const wrapper = mount(HomeView);
+    const title = getByText('My To Do´s List');
+    expect(title).toBeInTheDocument();
 
-  // Espera un breve momento para permitir que se realice la llamada a la API (puedes ajustar el tiempo según tus necesidades)
-  await new Promise(resolve => setTimeout(resolve, 100));
+    const addButton = getByTestId('add-button');
+    expect(addButton).toBeInTheDocument();
 
-  // Verifica que la propiedad "tasks" del componente se haya actualizado, lo que indicaría que se realizó una llamada a la API
-  expect(wrapper.vm.tasks).not.toEqual([]);
+    const urgentCategory = getByTestId('urgent-category');
+    const highCategory = getByTestId('high-category');
+    const normalCategory = getByTestId('normal-category');
+    expect(urgentCategory).toBeInTheDocument();
+    expect(highCategory).toBeInTheDocument();
+    expect(normalCategory).toBeInTheDocument();
+  });
 });
