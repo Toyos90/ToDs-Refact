@@ -1,55 +1,73 @@
 <script setup>
 import ApiConnection from '../services/ApiConnection';
 import ListCategory from '../components/ListCategory.vue';
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
 import AddButton from '../components/AddButton.vue';
 
 const tasks = ref([]);
+const selectedCategory = ref('all'); // Valor por defecto, 'all' representa todas las categorías
+const categories = ref([]); // Almacenar las categorías disponibles
 
 function getAllTasks() {
   ApiConnection.getAllTasks()
-  .then(response => {
-    tasks.value = response.data;
-    tasks.value.sort(((a, b) => {
-      const orderPriority = {urgent: 1, high: 2, normal: 3};
-      const orderByPriority = orderPriority[a.priority] - orderPriority[b.priority];
-      const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
-      return (orderByPriority === 0 ? orderByDate : orderByPriority);
-    }));
-  })
-  .catch(e => {
-    console.log(e);
-  });
+    .then(response => {
+      tasks.value = response.data;
+      tasks.value.sort((a, b) => {
+        const orderPriority = { urgent: 1, high: 2, normal: 3 };
+        const orderByPriority = orderPriority[a.priority] - orderPriority[b.priority];
+        const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
+        return orderByPriority === 0 ? orderByDate : orderByPriority;
+      });
+      // PRIMERO UN CONJUNTO CON Set, PARA EVITAR ELEMENTOS DUPLICADOS Y DESPUÉS ARRAY PARA FACILITAR ACCESO
+      categories.value = Array.from(new Set(response.data.map(task => task.category))); // Obtener categorías únicas
+    })
+    .catch(e => {
+      console.log(e);
+    });
 }
 
 onBeforeMount(() => {
   getAllTasks();
 })
 
+const filterTasksByCategory = computed(() => {
+  if (selectedCategory.value === 'all') {
+    return tasks.value;
+  } else {
+    return tasks.value.filter(task => task.category === selectedCategory.value);
+  }
+});
 </script>
 
-<template>
 
+<template>
   <main class="main-container">
-  
     <header>
-      <h1 class="categories-title">My To Do´s List</h1>
+      <h1 class="categories-title">Mi Lista de Tareas</h1>
     </header>
-  
-    <div class="categories">  
+
+    <div class="categories">
       <div class="ico-addTask">
         <AddButton></AddButton>
       </div>
-      <span class="new-task">Add new task</span>
+      <span class="new-task">Agregar nueva tarea</span>
     </div>
+
+    <div class="dropdown">
+      <label for="category-select">Categorías:</label>
+      <select id="category-select" v-model="selectedCategory">
+        <option value="all">Todas</option>
+        <option v-for="category in categories" :value="category" :key="category">{{ category }}</option>
+      </select>
+    </div>
+
     <div class="rectangles-categories">
-      <ListCategory :priority="'urgent'" :title="'Urgent'" :tasks="tasks"></ListCategory>
-      <ListCategory :priority="'high'" :title="'High'" :tasks="tasks"></ListCategory>
-      <ListCategory :priority="'normal'" :title="'Normal'" :tasks="tasks"></ListCategory>
+      <!-- Muestra todas las ListCategory y déjalas filtrarse automáticamente según la prioridad -->
+      <ListCategory :priority="'urgent'" :title="'Urgent'" :tasks="filterTasksByCategory"></ListCategory>
+      <ListCategory :priority="'high'" :title="'High'" :tasks="filterTasksByCategory"></ListCategory>
+      <ListCategory :priority="'normal'" :title="'Normal'" :tasks="filterTasksByCategory"></ListCategory>
     </div>
-  
   </main>
-  
 </template>
 
 <style scoped>
