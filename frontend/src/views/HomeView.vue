@@ -71,12 +71,12 @@ header{
   justify-content: center;
   align-items: center;
   height: 6.25rem;
-  background: peachpuff;
+  background: rgba(221, 75, 57, 0.7);
 }
 
 h1{
   font: normal 700 1.5rem "Inter";
-  color:rgb(50, 90, 198);
+  color:white;
 }
 .new-task{
   color: rgba(0, 0, 0, 1);
