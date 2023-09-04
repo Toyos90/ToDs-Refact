@@ -76,7 +76,7 @@ header{
 
 h1{
   font: normal 700 1.5rem "Inter";
-  color:rgba(255, 255, 255, 1);
+  color:rgb(50, 90, 198);
 }
 .new-task{
   color: rgba(0, 0, 0, 1);
