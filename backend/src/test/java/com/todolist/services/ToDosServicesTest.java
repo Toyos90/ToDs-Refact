@@ -126,8 +126,8 @@ class ToDosServicesTest {
         myArrayList.add(task1);
         myArrayList.add(task2);
 
-        when(myRepository.findIfItAlreadyExists(task1)).thenReturn(false);
-        when(myRepository.findIfItAlreadyExists(task2)).thenReturn(true);
+        when(myRepository.findIfItAlreadyExists(task1)).thenReturn(0);
+        when(myRepository.findIfItAlreadyExists(task2)).thenReturn(1);
 
         when(myRepository.save(task1)).thenReturn(task1);
         lenient().when(myRepository.save(task2)).thenReturn(task2);

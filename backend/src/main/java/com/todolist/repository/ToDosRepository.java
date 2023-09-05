@@ -13,8 +13,8 @@ public interface ToDosRepository extends JpaRepository<ToDo, Long> {
     //        " status = :thisStatus AND title=:thisTitle)", nativeQuery = true)
     //Boolean findIfItAlreadyExists(String thisCategory, String thisDescription, Date thisDate, boolean status, ToDo.Priority priority, String category );
 
-    @Query(value = "SELECT EXISTS( SELECT 1 FROM todo WHERE category = :#{#myTask.getCategory()} AND " +
+    @Query(value = "SELECT EXISTS( SELECT * FROM todo WHERE category = :#{#myTask.getCategory()} AND " +
             "description = :#{#myTask.getDescription()} AND due_date =:#{#myTask.getDueDate()} AND " +
             " status = :#{#myTask.isStatus()} AND title=:#{#myTask.getCategory()})", nativeQuery = true)
-    Boolean findIfItAlreadyExists(@Param("myTask") ToDo myTask);
+    int findIfItAlreadyExists(@Param("myTask") ToDo myTask);
 }
