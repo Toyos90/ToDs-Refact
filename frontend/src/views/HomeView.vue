@@ -5,8 +5,9 @@ import { ref, onBeforeMount, computed } from 'vue';
 import AddButton from '../components/AddButton.vue';
 
 const tasks = ref([]);
-const selectedCategory = ref('all'); // Valor por defecto, 'all' representa todas las categorías
-const categories = ref([]); // Almacenar las categorías disponibles
+const selectedCategory = ref('all'); 
+const categories = ref([]); 
+const sortOrder = ref('asc');
 
 function getAllTasks() {
   ApiConnection.getAllTasks()
@@ -18,7 +19,7 @@ function getAllTasks() {
         const orderByDate = new Date(a.dueDate).getDate() - new Date(b.dueDate).getDate();
         return orderByPriority === 0 ? orderByDate : orderByPriority;
       });
-      // PRIMERO UN CONJUNTO CON Set, PARA EVITAR ELEMENTOS DUPLICADOS Y DESPUÉS ARRAY PARA FACILITAR ACCESO
+     
       categories.value = Array.from(new Set(response.data.map(task => task.category))); // Obtener categorías únicas
     })
     .catch(e => {
@@ -31,11 +32,35 @@ onBeforeMount(() => {
 })
 
 const filterTasksByCategory = computed(() => {
+  let filteredTasks;
   if (selectedCategory.value === 'all') {
-    return tasks.value;
+    filteredTasks = tasks.value;
   } else {
-    return tasks.value.filter(task => task.category === selectedCategory.value);
+    filteredTasks = tasks.value.filter(task => task.category === selectedCategory.value);
   }
+  return filteredTasks.sort((a, b) => {
+    if (sortOrder.value === 'asc' || sortOrder.value === 'desc') {
+      if (!a.dueDate || !b.dueDate) {
+        return 0;
+      }
+      const dateA = a.dueDate.split('/').join('-');
+      const dateB = b.dueDate.split('/').join('-');
+      if (sortOrder.value === 'asc') {
+        return new Date(dateA) - new Date(dateB);
+      } else {
+        return new Date(dateB) - new Date(dateA);
+      }
+    } else if (sortOrder.value === 'titleAsc' || sortOrder.value === 'titleDesc') {
+      if (!a.title || !b.title) {
+        return 0;
+      }
+      if (sortOrder.value === 'titleAsc') {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    }
+  });
 });
 </script>
 
@@ -52,9 +77,15 @@ const filterTasksByCategory = computed(() => {
       </div>
       <span class="new-task">Agregar nueva tarea</span>
     </div>
-
+    <label for="sortOrder"> Ordenar por: </label>
+    <select v-model="sortOrder">
+  <option value="asc">Fecha ascendente</option>
+  <option value="desc">Fecha descendente</option>
+  <option value="titleAsc">Título ascendente</option>
+  <option value="titleDesc">Título descendente</option>
+</select>
     <div class="dropdown">
-      <label for="category-select">Categorías:</label>
+      <label for="category-select">Categorías: </label>
       <select id="category-select" v-model="selectedCategory">
         <option value="all">Todas</option>
         <option v-for="category in categories" :value="category" :key="category">{{ category }}</option>
@@ -67,7 +98,8 @@ const filterTasksByCategory = computed(() => {
       <ListCategory :priority="'normal'" :title="'Normal'" :tasks="filterTasksByCategory"></ListCategory>
     </div>
   </main>
-</template>
+</template> 
+
 
 <style scoped>
 

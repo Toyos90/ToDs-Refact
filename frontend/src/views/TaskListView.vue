@@ -1,27 +1,3 @@
-<script setup>
-import { useRoute } from 'vue-router';
-import { onBeforeMount, ref } from 'vue';
-import ApiConnection from '../services/ApiConnection';
-import TaskSelection from '../components/TaskSelection.vue';
-import AddButton from '../components/AddButton.vue';
-import CloseButton from '../components/CloseButton.vue';
-import Modal from '../components/Modal.vue';
-
-const route = useRoute();
-const priority = route.params.priority;
-const modal = (route.params.modal === 'true') || false;
-const action = route.params.action || '';
-
-const tasks = ref([]);
-const showModal = ref(false);
-
-onBeforeMount(async () => {
-  showModal.value = modal;
-  const taskData = await ApiConnection.getAllTasks();
-  tasks.value = taskData.data.filter((task) => task.priority === priority);
-});
-</script>
-
 <template>
   <div>
     <main class="task-list-layout">
@@ -31,6 +7,12 @@ onBeforeMount(async () => {
       <section class="list">
         <article class="title">
           <h2>Priority: {{ priority }}</h2>
+          <select v-model="sortOrder">
+  <option value="asc">Fecha ascendente</option>
+  <option value="desc">Fecha descendente</option>
+  <option value="titleAsc">Título ascendente</option>
+  <option value="titleDesc">Título descendente</option>
+</select>
         </article>
         <section v-if="tasks" class="tasks">
           <article class="task" v-for="task in tasks" :key="task.id">
@@ -54,6 +36,61 @@ onBeforeMount(async () => {
     </Teleport>
   </div>
 </template>
+
+<script setup>
+import { useRoute } from 'vue-router';
+import { onBeforeMount, ref, watch } from 'vue';
+import ApiConnection from '../services/ApiConnection';
+import TaskSelection from '../components/TaskSelection.vue';
+import AddButton from '../components/AddButton.vue';
+import CloseButton from '../components/CloseButton.vue';
+import Modal from '../components/Modal.vue';
+
+const route = useRoute();
+const priority = route.params.priority;
+const modal = (route.params.modal === 'true') || false;
+const action = route.params.action || '';
+
+const tasks = ref([]);
+const showModal = ref(false);
+const sortOrder = ref('asc');
+
+onBeforeMount(async () => {
+  showModal.value = modal;
+  const taskData = await ApiConnection.getAllTasks();
+  tasks.value = taskData.data.filter((task) => task.priority === priority);
+  sortTasks();
+});
+
+watch(sortOrder, sortTasks);
+
+function sortTasks() {
+  tasks.value.sort((a, b) => {
+    if (sortOrder.value === 'asc' || sortOrder.value === 'desc') {
+      if (!a.dueDate || !b.dueDate) {
+        return 0;
+      }
+      const dateA = a.dueDate.split('/').join('-');
+      const dateB = b.dueDate.split('/').join('-');
+      if (sortOrder.value === 'asc') {
+        return new Date(dateA) - new Date(dateB);
+      } else {
+        return new Date(dateB) - new Date(dateA);
+      }
+    } else if (sortOrder.value === 'titleAsc' || sortOrder.value === 'titleDesc') {
+      if (!a.title || !b.title) {
+        return 0;
+      }
+      if (sortOrder.value === 'titleAsc') {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
+    }
+  });
+}
+</script>
+
 
 <style scoped>
 .task-list-header {

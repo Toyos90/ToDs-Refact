@@ -23,7 +23,7 @@ const currentStatus = ref();
 onBeforeMount(() =>
 {
 	currentStatus.value = props.task.status;
-	props.task.dueDate = format(new Date(props.task.dueDate), 'dd-MM-yyyy');
+	props.task.dueDate = format(new Date(props.task.dueDate), 'MM-dd-yyyy');
 })
 
 
