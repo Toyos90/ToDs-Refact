@@ -20,7 +20,7 @@
 		width: 4rem;
 		height: 4rem;
 		border-radius: 5px;
-		background-color: #DF373B;
+		background-color: rgba(221, 75, 57, 0.7);
 	}
 
 </style>

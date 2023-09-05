@@ -66,7 +66,7 @@ const ftClose = () =>
 	.modal-default-button {
 	float: right;
 	margin: 1rem;
-	background-color: #4CAF50; /* Green */
+	background-color: #4CAF50;
 	border: none;
 	color: white;
 	text-align: center;
