@@ -1,6 +1,7 @@
 <script setup>
 import ApiConnection from '../services/ApiConnection'
 import PriorityDropdown from '../components/PriorityDropdown.vue'
+import CategoryDropdown from '../components/CategoryDropdown.vue'
 import CompleteButton from '../components/CompleteButton.vue'
 import Calendar from '../components/Calendar.vue'
 import CloseButton from '../components/CloseButton.vue'
@@ -52,9 +53,12 @@ const submit = async () => {
       <h4>Description (Optional)</h4>
       <input v-model="newTask.description" id="description-text" type="text" placeholder="Enter Description" />
 
-      <h4>Category (Optional)</h4>
-      <input v-model="newTask.category" id="category-text" type="text" placeholder="Enter Category" />
+      <!-- <h4>Category (Optional)</h4>
+      <input v-model="newTask.category" id="category-text" type="text" placeholder="Enter Category" /> -->
       
+      <h4>Category (Optional)</h4>
+      <CategoryDropdown @category="(category) => (newTask.category = category)"/>
+
     </div>
     <div>
       <CompleteButton @click="submit()" :fill="isAllFieldsFilled ? '#FF9E13' : '#565656'" />
