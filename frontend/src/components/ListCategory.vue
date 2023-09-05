@@ -56,7 +56,7 @@ const props = defineProps({
 
 .high{
   border:rgba(255, 158, 19, 1) solid 0.0625rem;
-  background-color:rgba(255, 158, 19, 0.7)=;
+  background-color:rgba(255, 158, 19, 0.7);
 }
 
 .normal{
