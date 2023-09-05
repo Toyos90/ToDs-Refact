@@ -62,7 +62,6 @@ const filterTasksByCategory = computed(() => {
     </div>
 
     <div class="rectangles-categories">
-      <!-- Muestra todas las ListCategory y déjalas filtrarse automáticamente según la prioridad -->
       <ListCategory :priority="'urgent'" :title="'Urgent'" :tasks="filterTasksByCategory"></ListCategory>
       <ListCategory :priority="'high'" :title="'High'" :tasks="filterTasksByCategory"></ListCategory>
       <ListCategory :priority="'normal'" :title="'Normal'" :tasks="filterTasksByCategory"></ListCategory>
