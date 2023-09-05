@@ -15,7 +15,8 @@ public class ToDosServices {
     public String saveTask(ToDo toDo) {
         try{
             //if(toDosRepository.findIfItAlreadyExists(toDo.getCategory(), toDo.getDescription(), toDo.getDueDate(), toDo.isStatus(), toDo.getPriority(), toDo.getCategory()))
-            if(toDosRepository.findIfItAlreadyExists(toDo)==false){
+            int numOfCoincidences=toDosRepository.findIfItAlreadyExists(toDo);
+            if(numOfCoincidences==0){
                 toDosRepository.save(toDo);
                 return "Added new task";
             }
