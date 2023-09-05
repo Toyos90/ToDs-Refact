@@ -8,10 +8,11 @@
         <article class="title">
           <h2>Priority: {{ priority }}</h2>
           <select v-model="sortOrder">
-            <option value="asc">Fecha ascendente</option>
-            <option value="desc">Fecha descendente</option>
-            <!-- Agrega aquí más opciones de ordenamiento si lo deseas -->
-          </select>
+  <option value="asc">Fecha ascendente</option>
+  <option value="desc">Fecha descendente</option>
+  <option value="titleAsc">Título ascendente</option>
+  <option value="titleDesc">Título descendente</option>
+</select>
         </article>
         <section v-if="tasks" class="tasks">
           <article class="task" v-for="task in tasks" :key="task.id">
@@ -65,15 +66,26 @@ watch(sortOrder, sortTasks);
 
 function sortTasks() {
   tasks.value.sort((a, b) => {
-    if (!a.creationDate || !b.creationDate) {
-      return 0;
-    }
-    const dateA = a.creationDate.split('/').join('-');
-    const dateB = b.creationDate.split('/').join('-');
-    if (sortOrder.value === 'asc') {
-      return new Date(dateA) - new Date(dateB);
-    } else {
-      return new Date(dateB) - new Date(dateA);
+    if (sortOrder.value === 'asc' || sortOrder.value === 'desc') {
+      if (!a.dueDate || !b.dueDate) {
+        return 0;
+      }
+      const dateA = a.dueDate.split('/').join('-');
+      const dateB = b.dueDate.split('/').join('-');
+      if (sortOrder.value === 'asc') {
+        return new Date(dateA) - new Date(dateB);
+      } else {
+        return new Date(dateB) - new Date(dateA);
+      }
+    } else if (sortOrder.value === 'titleAsc' || sortOrder.value === 'titleDesc') {
+      if (!a.title || !b.title) {
+        return 0;
+      }
+      if (sortOrder.value === 'titleAsc') {
+        return a.title.localeCompare(b.title);
+      } else {
+        return b.title.localeCompare(a.title);
+      }
     }
   });
 }
