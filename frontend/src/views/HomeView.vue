@@ -89,12 +89,12 @@ header{
   justify-content: center;
   align-items: center;
   height: 6.25rem;
-  background: peachpuff;
+  background: rgba(221, 75, 57, 0.7);
 }
 
 h1{
   font: normal 700 1.5rem "Inter";
-  color:rgba(255, 255, 255, 1);
+  color:white;
 }
 .new-task{
   color: rgba(0, 0, 0, 1);
@@ -111,8 +111,7 @@ h1{
 
 .categories-title{
   font: normal 700 1.875rem "Inter";
-  margin-bottom: 1.985rem;
-}
+  }
 
 .ico-addTask{
   width: 1.8125rem;
@@ -128,6 +127,14 @@ h1{
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .rectangles-categories {
+    display: flex;
+    flex-direction: row;
+    }
+  
 }
 
 </style>

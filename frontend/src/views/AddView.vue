@@ -112,7 +112,7 @@ const submit = async () => {
 }
 
 #top {
-  background: mediumaquamarine;
+  background-color: rgba(221, 75, 57, 0.7);
   padding: 0.4rem 2rem;
   border-radius: 0.6rem;
 }
@@ -130,12 +130,13 @@ h3 {
 }
 
 h4 {
+  background-color: rgba(255, 158, 19, 0.6);
   margin: 1rem 0;
   font-size:1.2rem;
 }
 
 input {
-  background-color: mediumturquoise;
+  background-color:rgba(221, 75, 57, 0.7);
   border: none;
   border-bottom: 0.1rem solid #FF9E13;
   padding: 0.5rem;
@@ -146,7 +147,7 @@ input {
 
 input:focus {
   border: 0.2rem solid white;
-  outline: 0.2rem solid #FF9E13;
+  outline: 0.2rem solid (255, 158, 19, 0.7);
   border-color: white;
   color: var(--vt-c-white);
 }
@@ -192,7 +193,7 @@ input:focus {
 
 p {
   padding: 0.5rem 0 0 7rem; 
-  color: #dd4b39;
+  color: (255, 158, 19, 0.7);
   font-style: italic;
 }
 
