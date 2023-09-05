@@ -120,7 +120,7 @@ function sortTasks() {
 
 select {
   border-radius: 25px !important;
-  background-color: rgba(50,201,83, 0.6) !important;
+  background-color: rgba(221, 75, 57, 0.7) !important;
   font-weight: bold !important;
   font-size: 16px !important;
   color: #333 !important;
