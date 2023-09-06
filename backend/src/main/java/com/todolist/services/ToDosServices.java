@@ -54,8 +54,14 @@ public class ToDosServices {
     public String updateTask(ToDo updateTask) {
         try {
             if (toDosRepository.existsById(updateTask.getId())) {
-                toDosRepository.save(updateTask);
-                return ("Task updated: " + updateTask.getTitle());
+                int numOfCoincidences=toDosRepository.findIfItAlreadyExists(updateTask);
+                if(numOfCoincidences==0) {
+                    toDosRepository.save(updateTask);
+                    return ("Task updated: " + updateTask.getTitle());
+                }
+                else{
+                    return ("Task NOT updated: " + updateTask.getTitle());
+                }
             } else {
                 return ("Task not updated: Record with ID : "+ updateTask.getId() + " does not exist");
             }

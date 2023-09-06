@@ -92,16 +92,22 @@ class ToDosServicesTest {
     @Test
     void test_should_update_a_task() {
 
-        ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Sin Categoria"  );
-        ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Con Categoria"  );
+        ToDo task1=new ToDo(1L, "testear front", "Usar Mockito y pañuelo", Date.valueOf("2023-09-22"), false, ToDo.Priority.valueOf("normal"), "Casa"  );
+        ToDo task2=new ToDo(2L, "testear back", "Usar vitest y lo que haga falta", Date.valueOf("2023-09-21"), false, ToDo.Priority.valueOf("urgent"), "Casa"  );
+        ToDo task3=new ToDo(3L, "Aplicar UX/UI", "Usar toda la sabiduria acumulada", Date.valueOf("2023-09-22"), true, ToDo.Priority.valueOf("urgent"), "Casa"  );
+
 
         ArrayList<ToDo> myArrayList=new ArrayList<>();
         myArrayList.add(task1);
         myArrayList.add(task2);
 
         when(myRepository.existsById(task1.getId())).thenReturn(true);
+        when(myRepository.existsById(task3.getId())).thenReturn(true);
         when(myRepository.existsById(task2.getId())).thenReturn(false);
         lenient().when(myRepository.existsById(null)).thenThrow(new IllegalArgumentException("Cannot invoke \"com.todolist.model.ToDo.getId()\" because \"updateTask\" is null") );
+
+        when(myRepository.findIfItAlreadyExists(task1)).thenReturn(0);
+        when(myRepository.findIfItAlreadyExists(task3)).thenReturn(1);
 
         when(myRepository.save(task1)).thenReturn(task1);
         lenient().when(myRepository.save(task2)).thenReturn(task2);
@@ -110,10 +116,12 @@ class ToDosServicesTest {
         String myResult=myServices.updateTask(task1);
         String myResult2=myServices.updateTask(task2);
         String myResult3=myServices.updateTask(null);
+        String myResult4=myServices.updateTask(task3);
 
         assertEquals(myResult,"Task updated: testear front" );
         assertEquals(myResult2, "Task not updated: Record with ID : 2 does not exist");
         assertEquals(myResult3,"Task not updated: Cannot invoke \"com.todolist.model.ToDo.getId()\" because \"updateTask\" is null" );
+        assertEquals(myResult4,"Task NOT updated: Aplicar UX/UI" );
     }
 
     @Test
