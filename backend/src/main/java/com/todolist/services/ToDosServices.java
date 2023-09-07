@@ -11,12 +11,21 @@ public class ToDosServices {
     @Autowired
     ToDosRepository toDosRepository;
 
+    //Deberia revisar si se hay entradas duplicadas
     public String saveTask(ToDo toDo) {
         try{
-            toDosRepository.save(toDo);
-            return "Added new task";
+            //if(toDosRepository.findIfItAlreadyExists(toDo.getCategory(), toDo.getDescription(), toDo.getDueDate(), toDo.isStatus(), toDo.getPriority(), toDo.getCategory()))
+            int numOfCoincidences=toDosRepository.findIfItAlreadyExists(toDo);
+            if(numOfCoincidences==0){
+                toDosRepository.save(toDo);
+                return "Added new task";
+            }
+            else {
+                return "Task already exists";}
+
         }catch(Exception error) {
-            return error.getMessage();
+            //return error.getMessage();
+            return "excepcion";
         }
     }
 
@@ -28,10 +37,15 @@ public class ToDosServices {
         return (ArrayList<ToDo>) toDosRepository.findAll();
     }
 
+    //Añadida comprobacion de si la tarea existe o no para borrarla.
     public String deleteTask(long id) {
         try{
-            toDosRepository.deleteById(id);
-            return "Deleted "+id;
+            if(toDosRepository.existsById(id)){
+                toDosRepository.deleteById(id);
+                return "Deleted "+id;
+            }
+            else return "Task doesn't exist";
+
         }catch(Exception error) {
             return error.getMessage();
         }
@@ -43,10 +57,11 @@ public class ToDosServices {
                 toDosRepository.save(updateTask);
                 return ("Task updated: " + updateTask.getTitle());
             } else {
-                return ("Task not updated: Record with ID :"+ updateTask.getId() + "does not exist");
+                return ("Task not updated: Record with ID : "+ updateTask.getId() + " does not exist");
             }
         }catch(Exception error) {
-            throw new RuntimeException("Task not updated: "+error.getMessage());
+            //throw new RuntimeException("Task not updated: "+error.getMessage());
+            return ("Task not updated: "+error.getMessage());
         }
     }
 }

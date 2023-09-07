@@ -1,12 +1,12 @@
 <script setup>
 const props = defineProps({
-    path: {
+path: {
         type: String,
     },
-     fill: {
+fill: {
       type: String,
       default: "white"
-     }
+    }
 })
 </script>
 
